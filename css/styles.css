@@ -9,6 +9,17 @@ h1 {
 	color: #ffffff;
 	font-size: 4em;
 	margin-top: 1em;
+	display: none;
+}
+
+.jellyfish-image {
+	margin-top: 8em;
+	margin-bottom: 6em;
+	text-align: center;
+}
+
+.list-area {
+	display: none;
 }
 
 .question {
@@ -63,11 +74,21 @@ button {
 	border-radius: 0.2em;
 }
 
-section {
+.submit {
+	display: none;
+}
+
+.submission {
 	margin: 0 auto;
 	display: block;
 	text-align: center;
 }
+
+.progress {
+	margin: 1.5em auto;
+	text-align: center;
+}
+
 h3 {
 	text-align: center;
 	color: #ffffff;
@@ -75,9 +96,16 @@ h3 {
 	font-family: "Nunito", sans-serif;
 	font-weight: 300;
 	margin-top: 0.5em;
+	display: none;
+}
+
+.milestones {
+	display: inline;
+	display: none;
 }
 
 .milestones li {
-	display: inline-block;
 	margin: 1em;
-}
+	display: inline;
+/*	display: none;
+*/}
