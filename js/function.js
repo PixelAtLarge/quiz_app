@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var scores = [];
 	var score;
 
+
 	function Item(question, answers, correctanswer, feedback) {
 		this.question = question;
 		this.answers = answers;
@@ -32,7 +33,7 @@ $(document).ready(function(){
 
 	q3 = new Item("True or false? Jellyfish kill more people than sharks each year.", ["True", "False"], "True","")
 
-	q4 = new Item("What is the top of the jellyfish that looks like a mushroom top called?", ["Bell", "Bulb", "Body", "Cortex", "Head"], "Bell","")
+	q4 = new Item("What is the top of the jellyfish (the part that looks like a mushroom top) called?", ["Bell", "Bulb", "Body", "Cortex", "Head"], "Bell","")
 
 	q5 = new Item("True or false? A jellyfish stinger can shoot out faster than a bullet from a gun.", ["True", "False"], "True","")
 
@@ -66,13 +67,23 @@ $(document).ready(function(){
 	/*--- Submit answer ---*/
 	$(".submit").click(function(e){
 		e.preventDefault();
-		saveResponse();
-		calculateScore();
-		if (scores.length < quiz.length) {
-			$(".list-area, .submit, h3, .milestones").fadeOut(1200, loadNextQuestion);
+		var answersChecked = 0;
+		$(".responses").children().each(function(index, elem) {
+    		answersChecked += $(this).find(".fa-check-square-o").length;
+    	})
+		if (answersChecked > 1) {
+			alert("Please select ONE answer before clicking 'submit'");
+		} else if (answersChecked == 0){
+			alert("Please select at least one answer before clicking 'submit'");
 		} else{
-			$(".score").text("Your score is: " + scores[scores.length-1] + " %");
-			$(".list-area, .submit, h3, .milestones").fadeOut(800, showScore);
+			saveResponse();
+			calculateScore();
+			if (scores.length < quiz.length) {
+				$(".list-area, .submit, h3, .milestones").fadeOut(1200, loadNextQuestion);
+			} else{
+				$(".score").text("Your score is " + scores[scores.length-1] + " %");
+				$(".list-area, .submit, h3, .milestones").fadeOut(800, showScore);
+			};
 		};
 	});
 
@@ -82,13 +93,11 @@ $(document).ready(function(){
     		numCorrect += $(this).find(".fa-check-square-o").length;
     	})
     	var score = numCorrect / quiz.length * 100;
-    	// console.log("this is your score: " + score + " %")
     	scores.push(score);
 	}
 
 	function showScore(){
-		$(".jellyfish-image").fadeIn(1200);
-		$(".score").fadeIn(1200);
+		$(".jellyfish-image, .score, .restart-quiz").fadeIn(1200);
 	}
 
 	/*--- Add submitted answer to array ---*/
@@ -101,6 +110,16 @@ $(document).ready(function(){
 		} else {
 			$(milestone[selectedAnswers.length-1]).find("i").removeClass("fa-square").addClass("fa-minus-square-o");
 		};
+	}
+
+	$(".restart-quiz").click(function(e){
+		e.preventDefault();
+		$("h1, .jellyfish-image, .score, .restart-quiz").fadeOut(1200, newQuiz);
+	})
+
+
+	function newQuiz () {
+		location.reload();
 	}
 
 });
