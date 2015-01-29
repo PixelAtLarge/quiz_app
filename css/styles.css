@@ -22,7 +22,8 @@ h1 {
 	display: none;
 }
 
-.question {
+.question,
+.score {
 	color: #ffffff;
 	font-size: 2.5em;
 	text-align: center;
@@ -96,6 +97,14 @@ h3 {
 	font-family: "Nunito", sans-serif;
 	font-weight: 300;
 	margin-top: 0.5em;
+	display: none;
+}
+
+h4 {
+	display: none;
+}
+
+h5 {
 	display: none;
 }
 
